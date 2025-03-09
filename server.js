@@ -3,14 +3,18 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 
-// Configure CORS with specific options
+// Configure CORS with more permissive options
 app.use(cors({
-  origin: 'http://localhost:3000',
-  methods: ['POST', 'GET'],
-  credentials: true
+  origin: true, // Allow all origins in development
+  methods: ['POST', 'GET', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
+
+// Add OPTIONS handler for preflight requests
+app.options('*', cors());
 
 // Log API endpoint with error handling
 app.post('/api/log', (req, res) => {
@@ -29,7 +33,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));  // Changed from 'build' to 'dist'
 });
 
-const port = 3001;  // Changed from 3000 to 3001
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const PORT = process.env.PORT || 3003;  // Change default from 3001 to 3003
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

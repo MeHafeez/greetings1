@@ -39,24 +39,29 @@ const SecretMessageApp = () => {
 
     const isValidName = listOfNames.includes(name.toLowerCase());
     const secretMessage = "U29ycnksIHRoaXMgaW5mb3JtYXRpb24gd2FzI";
-
     // Dynamic API URL based on environment
     const apiUrl = process.env.NODE_ENV === 'production' 
       ? 'https://canwe-nine.vercel.app/api/log'  // Production URL (Vercel)
-      : 'http://localhost:3001/api/log';  // Development URL
-
+      : 'http://localhost:3003/api/log';  // Updated to match your server port
     fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
+      mode: 'cors',
       credentials: 'include',
       body: JSON.stringify({
         name: name,
         isValid: isValidName,
         timestamp: new Date().toISOString()
       })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
     })
     .catch(error => {
       console.error('Logging error:', error);

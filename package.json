@@ -2,7 +2,7 @@
   "name": "myapp",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
+  "proxy": "http://localhost:3003",
   "dependencies": {
     "concurrently": "^9.1.2",
     "cors": "^2.8.5",
@@ -15,8 +15,8 @@
     "web-vitals": "^4.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "server": "node server.js",
+    "start": "set PORT=3002 && react-scripts start",
+    "server": "set PORT=3003 && node server.js",
     "dev": "concurrently \"npm run start\" \"npm run server\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
