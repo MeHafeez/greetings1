@@ -3,31 +3,26 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 
-// Updated CORS configuration to handle both local and production
+// Updated CORS configuration
 const allowedOrigins = [
   'http://localhost:3002',
   'https://canwe-nine.vercel.app',
   'https://greetings1.vercel.app',
-  'https://canyou.vercel.app/'
+  'https://canyou.vercel.app'  // Removed trailing slash
 ];
 
+// Enable pre-flight requests for all routes
+app.options('*', cors());
+
+// Updated CORS middleware
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['POST', 'GET', 'OPTIONS'],
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: '*',  // Allow all origins temporarily for debugging
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200
 }));
 
 app.use(express.json());
-
-// Add OPTIONS handler for preflight requests
-app.options('*', cors());
 
 // Log API endpoint with error handling
 app.post('/api/log', (req, res) => {

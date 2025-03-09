@@ -41,16 +41,14 @@ const SecretMessageApp = () => {
     const secretMessage = "U29ycnksIHRoaXMgaW5mb3JtYXRpb24gd2FzI";
     // Dynamic API URL based on environment
     const apiUrl = process.env.NODE_ENV === 'production' 
-      ? 'https://canwe-nine.vercel.app/api/log'  // Production URL (Vercel)
-      : 'http://localhost:3003/api/log';  // Updated to match your server port
+      ? 'https://canyou.vercel.app/api/log'  // Updated production URL
+      : 'http://localhost:3003/api/log';
     fetch(apiUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Content-Type': 'application/json'
       },
       mode: 'cors',
-      // removed credentials: 'include'
       body: JSON.stringify({
         name: name,
         isValid: isValidName,
