@@ -3,9 +3,21 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 
-// Configure CORS with more permissive options
+// Updated CORS configuration to handle both local and production
+const allowedOrigins = [
+  'http://localhost:3002',
+  'https://canwe-nine.vercel.app',
+  'https://greetings1.vercel.app'
+];
+
 app.use(cors({
-  origin: true, // Allow all origins in development
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['POST', 'GET', 'OPTIONS'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization']

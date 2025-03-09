@@ -50,7 +50,7 @@ const SecretMessageApp = () => {
         'Accept': 'application/json'
       },
       mode: 'cors',
-      credentials: 'include',
+      // removed credentials: 'include'
       body: JSON.stringify({
         name: name,
         isValid: isValidName,
