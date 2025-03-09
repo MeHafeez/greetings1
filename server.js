@@ -30,7 +30,7 @@ app.post('/api/log', (req, res) => {
 
 // All other GET requests not handled before will return our React app
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));  // Changed from 'build' to 'dist'
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));  // Changed from 'dist' to 'build'
 });
 
 const PORT = process.env.PORT || 3003;  // Change default from 3001 to 3003
