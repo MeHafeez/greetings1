@@ -7,7 +7,8 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:3002',
   'https://canwe-nine.vercel.app',
-  'https://greetings1.vercel.app'
+  'https://greetings1.vercel.app',
+  'https://canyou.vercel.app/'
 ];
 
 app.use(cors({
